@@ -3,7 +3,7 @@ name: Build and Test Java with Gradle
 on:
   push:
     branches:
-      - master  # Adjust the branch name as needed
+      - master # Adjust the branch name as needed
   pull_request:
 
 jobs:
@@ -19,16 +19,17 @@ jobs:
       with:
         java-version: 17
 
-    - name: Download and cache Gradle
-      uses: gradle/wrapper-action@v2
-      with:
-        version: 8.1.1
+    - name: Install Gradle
+      run: |
+        wget https://services.gradle.org/distributions/gradle-8.1.1-bin.zip
+        unzip -d /opt gradle-8.1.1-bin.zip
+        export PATH=$PATH:/opt/gradle-8.1.1/bin
 
     - name: Build with Gradle
-      run: ./gradlew build --info  # Use --info for detailed output
+      run: gradle build --info  # Use --info for detailed output
 
     - name: Run tests
-      run: ./gradlew test
+      run: gradle test
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
