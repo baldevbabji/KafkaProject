@@ -3,7 +3,7 @@ name: Build and Test Java with Gradle
 on:
   push:
     branches:
-      - main  # Adjust the branch name as needed
+      - master  # Adjust the branch name as needed
   pull_request:
 
 jobs:
